@@ -1,0 +1,8 @@
+note over browser:
+the save button is clicked
+and the form is submitted
+end note
+
+browser->browser: the list is redrawn
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: status code
