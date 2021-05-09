@@ -2,26 +2,22 @@ import React from 'react'
 
 const Header = (props) => {
   return (
-    <>
-      <h1>{props.course}</h1>
-    </>
+    <h1>{props.course.name}</h1>
   )
 };
 
 const Part = (props) => {
   return (
     <p>
-      {props.coursePart} {props.courseExercises}
+      {props.partName} {props.partExercises}
     </p>
   )
 }
 
 const Content = (props) => {
-  const courseList = props.courses.map((course) => {
+  const courseList = props.course.parts.map((part) => {
     return (
-      <>
-        <Part coursePart={course.part} courseExercises={course.exercises}/>
-      </>
+      <Part partName={part.name} partExercises={part.exercises}/>
     )
   })
 
@@ -32,38 +28,38 @@ const Content = (props) => {
   )
 };
 
-const Total  = (props) => {
-  const noOfTotalExercises = props.courses.reduce((a, b) => a + (b.exercises || 0), 0);
+const Total = (props) => {
+  const noOfTotalExercises = props.course.parts.reduce((a, b) => a + (b.exercises || 0), 0);
 
   return (
-    <>
-      <p>Number of exercises {noOfTotalExercises}</p>
-    </>
+    <p>Number of exercises {noOfTotalExercises}</p>
   )
 };
 
 const App = () => {
-  const courseTitle = 'Half Stack application development'
-  const courseExercises = [
-    {
-      part: 'Fundamentals of React',
-      exercises: 10,
-    },
-    {
-      part: 'Using props to pass data',
-      exercises: 7,
-    },
-    {
-      part: 'State of a component',
-      exercises: 14,
-    },
-  ]
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+      }
+    ]
+  }
 
   return (
     <div>
-      <Header course={courseTitle}/>
-      <Content courses={courseExercises}/>
-      <Total courses={courseExercises}/>
+      <Header course={course}/>
+      <Content course={course}/>
+      <Total course={course}/>
     </div>
   )
 }
