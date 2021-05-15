@@ -1,21 +1,21 @@
 import React from 'react'
 
-const Header = (props) => {
+const Header = ({ course }) => {
   return (
-    <h1>{props.course.name}</h1>
+    <h1>{course.name}</h1>
   )
 };
 
-const Part = (props) => {
+const Part = ({ partName, partExercises }) => {
   return (
     <p>
-      {props.partName} {props.partExercises}
+      {partName} {partExercises}
     </p>
   )
 }
 
-const Content = (props) => {
-  const courseList = props.course.parts.map((part) => {
+const Content = ({course}) => {
+  const courseList = course.parts.map((part) => {
     return (
       <Part partName={part.name} partExercises={part.exercises}/>
     )
@@ -28,8 +28,8 @@ const Content = (props) => {
   )
 };
 
-const Total = (props) => {
-  const noOfTotalExercises = props.course.parts.reduce((a, b) => a + (b.exercises || 0), 0);
+const Total = ({course}) => {
+  const noOfTotalExercises = course.parts.reduce((a, b) => a + (b.exercises || 0), 0);
 
   return (
     <p>Number of exercises {noOfTotalExercises}</p>
